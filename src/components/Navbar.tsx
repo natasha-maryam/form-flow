@@ -1,25 +1,25 @@
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Button } from './ui/button';
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
-    { href: '#home', label: 'Home', id: 'home' },
-    { href: '#features', label: 'Features', id: 'features' },
-    { href: '#templates', label: 'Templates', id: 'templates' },
-    { href: '#pricing', label: 'Pricing', id: 'pricing' },
-    { href: '#testimonials', label: 'Testimonials', id: 'testimonials' },
-    { href: '#faq', label: 'FAQ', id: 'faq' },
-    { href: '#contact', label: 'Contact', id: 'contact' },
+    { href: "#home", label: "Home", id: "home" },
+    { href: "#features", label: "Features", id: "features" },
+    { href: "#templates", label: "Templates", id: "templates" },
+    { href: "#pricing", label: "Pricing", id: "pricing" },
+    { href: "#testimonials", label: "Testimonials", id: "testimonials" },
+    { href: "#faq", label: "FAQ", id: "faq" },
+    { href: "#contact", label: "Contact", id: "contact" },
   ];
 
   // Track active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map(item => item.id);
+      const sections = navItems.map((item) => item.id);
       const scrollPosition = window.scrollY + 100;
 
       for (const sectionId of sections) {
@@ -27,8 +27,11 @@ const Navbar = () => {
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
-          
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveSection(sectionId);
             break;
           }
@@ -36,18 +39,17 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string, id: string) => {
+  const handleNavClick = (id: string) => {
     setActiveSection(id);
     setIsOpen(false);
-    
-    // Smooth scroll to section
+
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -66,9 +68,9 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <button
                   key={item.href}
-                  onClick={() => handleNavClick(item.href, item.id)}
+                  onClick={() => handleNavClick(item.id)}
                   className={`nav-link text-sm font-medium transition-all ${
-                    activeSection === item.id ? 'active' : ''
+                    activeSection === item.id ? "active" : ""
                   }`}
                 >
                   {item.label}
@@ -79,9 +81,7 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <Button className="btn-gradient">
-              Start for Free
-            </Button>
+            <Button className="btn-gradient">Start for Free</Button>
           </div>
 
           {/* Mobile menu button */}
@@ -92,7 +92,11 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="text-foreground"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </Button>
           </div>
         </div>
@@ -105,18 +109,16 @@ const Navbar = () => {
             {navItems.map((item) => (
               <button
                 key={item.href}
-                onClick={() => handleNavClick(item.href, item.id)}
+                onClick={() => handleNavClick(item.id)}
                 className={`nav-link block w-full text-left px-3 py-2 text-base font-medium transition-all ${
-                  activeSection === item.id ? 'active' : ''
+                  activeSection === item.id ? "active" : ""
                 }`}
               >
                 {item.label}
               </button>
             ))}
             <div className="pt-4 pb-2">
-              <Button className="btn-gradient w-full">
-                Start for Free
-              </Button>
+              <Button className="btn-gradient w-full">Start for Free</Button>
             </div>
           </div>
         </div>
