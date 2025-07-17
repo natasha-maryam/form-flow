@@ -112,7 +112,7 @@ const TemplatesSection = () => {
                   </div>
                   
                   <div className="space-y-3">
-                    {template.fields.map((field, idx) => (
+                    {template.fields.map((field) => (
                       <div
                         key={field}
                         className="h-8 bg-background rounded border border-border flex items-center px-3"
